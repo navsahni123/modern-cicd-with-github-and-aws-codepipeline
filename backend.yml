@@ -132,7 +132,7 @@ Resources:
                   - dynamodb:Scan
                   - dynamodb:UpdateItem
                 Resource: !GetAtt RoomsTable.Arn
-    ECSSecurityGroup:
+  ECSSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Security group for ECS tasks
@@ -272,9 +272,17 @@ Resources:
       Description: "Hotel app URI"
       Type: String
       Value: !Sub "https://${CloudFrontDistribution.DomainName}"
-              
 
 Outputs:
   DynamoDBTableName:
     Description: "Name of the DynamoDB Table"
     Value: !Ref RoomsTable
+  ApplicationURL:
+    Description: "CloudFront Distribution URL"
+    Value: !Sub "https://${CloudFrontDistribution.DomainName}"
+  ECSClusterName:
+    Description: "Name of the ECS Cluster"
+    Value: !Ref ECSCluster
+  ECSServiceName:
+    Description: "Name of the ECS Service"
+    Value: !Ref ECSService
